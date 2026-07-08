@@ -221,4 +221,29 @@ app.get("/api/colors", async (req, res) => {
   }
 });
 
+app.post("/api/find-closest-color", (req, res) => {
+  const { r, g, b, a = 255 } = req.body;
+
+  if (!scrapedColors || Object.keys(scrapedColors).length === 0) {
+    return res.status(400).json({ error: "No color table loaded." });
+  }
+
+  const { updatedPixels } = processImage([r, g, b, a], scrapedColors);
+
+  const [newR, newG, newB, newA] = updatedPixels;
+
+  const rgbKey = `R${newR}G${newG}B${newB}`;
+  const matchedColor = scrapedColors[rgbKey];
+
+  res.json({
+    colorKey: `R${newR}G${newG}B${newB}A${newA}`,
+    r: newR,
+    g: newG,
+    b: newB,
+    a: newA,
+    name: matchedColor?.name ?? rgbKey,
+    code: matchedColor?.code,
+  });
+});
+
 module.exports = app;
