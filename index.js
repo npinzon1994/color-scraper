@@ -14,9 +14,9 @@ const upload = multer(); //communicates between frontend and backend
 app.use(cors({
   origin: [
     "http://localhost:5173",
-    "https://nikkipixelarts.com",
-    "https://www.nikkipixelarts.com",
-    "https://npinzon1994.github.io",
+    "https://nikkipixelarts.com/bead-sprite-generator",
+    "https://www.nikkipixelarts.com/bead-sprite-generator",
+    "https://npinzon1994.github.io/bead-sprite-generator",
   ],
   methods: ["GET", "POST", "OPTIONS"],
   allowedHeaders: ["Content-Type"],
