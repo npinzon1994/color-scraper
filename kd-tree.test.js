@@ -40,6 +40,35 @@ describe("KDTree Normal Case", () => {
     expect(sortedPoints[2]).toEqual(tree.point);
   });
 
+  test("calculateDeltaE returns correct color difference", () => {
+    const tree = new KDTree();
+    const point1 = [50.0000, 2.8361, -74.0200];
+    const point2 = [50.0000, 0.0000, -82.7485];
+    const { h_dash, aPrime1, aPrime2, cPrime1, cPrime2, hPrime1, hPrime2, G, T, sL, sC, sH, rT, deltaE, delta_h, deltaH, deltaL, deltaC } = tree.calculateDeltaE(point1, point2);
+
+    // expect(G).toBeCloseTo(0.0001);
+    // expect(aPrime1).toBeCloseTo(2.6774);
+    // expect(aPrime2).toBeCloseTo(0);
+    // expect(cPrime1).toBeCloseTo(79.8200);
+    // expect(cPrime2).toBeCloseTo(82.7485);
+    // expect(hPrime1).toBeCloseTo(271.9222);
+    // expect(hPrime2).toBeCloseTo(270);
+    // expect(h_dash).toBeCloseTo(270.9611);
+    // expect(T).toBeCloseTo(0.6907);
+    // expect(sL).toBeCloseTo(1.0000);
+    // expect(sC).toBeCloseTo(4.6578);
+    // expect(sH).toBeCloseTo(1.8421);
+    // expect(rT).toBeCloseTo(-1.7042);
+    // expect(delta_h).toBeCloseTo(-1.9222);
+    // expect(deltaH).toBeCloseTo(-2.7264);
+    // expect(deltaL).toBeCloseTo(0);
+    // expect(deltaC).toBeCloseTo(2.9285);
+
+    expect(typeof deltaE === 'number').toBe(true);
+    expect(isNaN(deltaE)).toBe(false);
+    expect(deltaE).toBeCloseTo(3.4412);
+  });
+
   //covers all forseeable cases
   test("calculateDistance returns correct Euclidean distance", () => {
     const tree = new KDTree();

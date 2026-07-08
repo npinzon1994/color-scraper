@@ -133,13 +133,6 @@
     "code": "S83"
   },
   "R122G62B44": {
-    "name": "Buccaneer",
-    "r": 122,
-    "g": 62,
-    "b": 44,
-    "code": "S57"
-  },
-  "R122G62B44": {
     "name": "Redwood",
     "r": 122,
     "g": 62,
@@ -286,7 +279,6 @@
     "b": 44,
     "code": "S48"
   },
-
   "R234G170B0": {
     "name": "Goldenrod",
     "r": 234,
@@ -574,7 +566,6 @@
     "b": 171,
     "code": "S47"
   },
-
   "R158G130B186": {
     "name": "Candy Violet",
     "r": 158,
@@ -630,13 +621,6 @@
     "g": 154,
     "b": 204,
     "code": "S136"
-  },
-  "R140G163B212": {
-    "name": "Moonlight Blue",
-    "r": 140,
-    "g": 163,
-    "b": 212,
-    "code": "S135"
   },
   "R89G129B193": {
     "name": "Azure Blue",
@@ -966,13 +950,6 @@
     "g": 70,
     "b": 65,
     "code": "S126"
-  },
-  "R0G104B94": {
-    "name": "Dark Green",
-    "r": 0,
-    "g": 104,
-    "b": 94,
-    "code": "S09"
   },
   "R211G201B93": {
     "name": "Pale Yellow Moss",

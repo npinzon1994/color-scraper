@@ -11,7 +11,16 @@ const { processImage } = require("./matrix-transformations");
 const app = express(); //this is the express app
 const upload = multer(); //communicates between frontend and backend
 
-app.use(cors()); //ensures the frontend can call this API without CORS issues
+app.use(cors({
+  origin: [
+    "http://localhost:5173",
+    "https://nikkipixelarts.com",
+    "https://www.nikkipixelarts.com",
+    "https://npinzon1994.github.io",
+  ],
+  methods: ["GET", "POST", "OPTIONS"],
+  allowedHeaders: ["Content-Type"],
+})); //ensures the frontend can call this API without CORS issues
 app.use(express.json()); // Automatically parses JSON in the request body
 
 let scrapedColors = null;
@@ -29,11 +38,15 @@ app.get("/api/default-image", async (req, res) => {
 
     const { width, height } = info;
     const pixels = Array.from(data);
+    console.log("OG Pixels:", pixels);
+    console.log("Scraped colors:", scrapedColors);
+
     const { updatedPixels, lookupTable_LabValues } = processImage(
       pixels,
       scrapedColors
     );
-    console.log("UPDATED PIXELS: ", updatedPixels);
+    console.log("UPDATED Pixels: ", updatedPixels);
+    console.log("Lookup Table: ", lookupTable_LabValues);
 
     res.json({
       width,
@@ -68,6 +81,7 @@ app.post("/api/upload-image", upload.single("image"), async (req, res) => {
 
     const { width, height } = info;
     const pixels = Array.from(data);
+    // console.log("RGBA Array: ", pixels);
     const { updatedPixels, lookupTable_LabValues } = processImage(
       pixels,
       scrapedColors
@@ -92,7 +106,6 @@ async function readJSONFiles(paths) {
       paths.map(async (path) => {
         try {
           const data = await fs.promises.readFile(path, "utf8");
-          console.log("Number of colors in file: ", data.length);
           return data;
         } catch (error) {
           console.error("Error reading file: ", error);
@@ -107,7 +120,8 @@ async function readJSONFiles(paths) {
 
     const mergedColorData = jsonData.reduce((acc, obj) => ({ ...acc, ...obj }));
 
-    console.log("JSON Data: ", mergedColorData);
+    // console.log("JSON Data: ", mergedColorData);
+    // console.log("Number of colors in file: ", Object.keys(mergedColorData).length);
 
     return mergedColorData;
   } catch (error) {
@@ -143,6 +157,7 @@ app.post("/api/get-color-table", async (req, res) => {
       : undefined;
 
     const filePaths = [perlers, artkals, topTiers];
+    console.log("Selected Brands: ", filePaths);
     if (!filePaths) {
       res.status(404).json({ error: "File path(s) not found." });
     }
