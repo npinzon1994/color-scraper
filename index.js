@@ -11,16 +11,7 @@ const { processImage } = require("./matrix-transformations");
 const app = express(); //this is the express app
 const upload = multer(); //communicates between frontend and backend
 
-app.use(cors({
-  origin: [
-    "http://localhost:5173",
-    "https://nikkipixelarts.com/bead-sprite-generator",
-    "https://www.nikkipixelarts.com/bead-sprite-generator",
-    "https://npinzon1994.github.io/bead-sprite-generator",
-  ],
-  methods: ["GET", "POST", "OPTIONS"],
-  allowedHeaders: ["Content-Type"],
-})); //ensures the frontend can call this API without CORS issues
+app.use(cors()); //ensures the frontend can call this API without CORS issues
 app.use(express.json()); // Automatically parses JSON in the request body
 
 let scrapedColors = null;
